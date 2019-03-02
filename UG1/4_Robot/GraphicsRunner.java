@@ -19,11 +19,10 @@ public class GraphicsRunner extends JFrame
       
     setSize(WIDTH,HEIGHT);
     
-    getContentPane().add(new SmileyFace());
     
     //add other classes to run them 
     //BigHouse, Robot, or ShapePanel 
-    
+	getContentPane().add(new Robot());    
     setVisible(true);
     
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
