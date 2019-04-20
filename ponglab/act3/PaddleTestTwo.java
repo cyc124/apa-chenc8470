@@ -17,6 +17,7 @@ public class PaddleTestTwo extends Canvas implements KeyListener, Runnable
 {
   private Ball ball;
   private Paddle leftPaddle;
+	private Paddle rightPaddle;
   private boolean[] keys;               //keeps track of what keys are pressed
 
   public PaddleTestTwo()
@@ -27,7 +28,9 @@ public class PaddleTestTwo extends Canvas implements KeyListener, Runnable
     //instantiate a Ball
                 
                 
-                
+	ball = new Ball();
+	leftPaddle= new Paddle(10,10,30,100,5);  
+	rightPaddle = new Paddle(500,10,30,100,5);              
     //instantiate a left Paddle
                 
                 
@@ -59,7 +62,7 @@ public class PaddleTestTwo extends Canvas implements KeyListener, Runnable
   {
     ball.moveAndDraw(window);
     leftPaddle.draw(window);
-
+	rightPaddle.draw(window);
     if (!(ball.getX()>=10 && ball.getX()<=550))
     {
       ball.setXSpeed(-ball.getXSpeed());
@@ -70,24 +73,41 @@ public class PaddleTestTwo extends Canvas implements KeyListener, Runnable
       ball.setYSpeed(-ball.getYSpeed());
     }
 
-    if (keys[0])
+	if (ball.getX()<=leftPaddle.getX()+leftPaddle.getWidth()&&ball.getY()>=leftPaddle.getY()&&ball.getY()<=leftPaddle.getY()+leftPaddle.getHeight())
+	{
+		ball.setXSpeed(-ball.getXSpeed());
+	}
+	
+	
+	if (ball.getX()>=rightPaddle.getX()&&ball.getY()>=rightPaddle.getY()&&ball.getY()<=rightPaddle.getY()+rightPaddle.getHeight())
+	{
+		ball.setXSpeed(-ball.getXSpeed());
+	}
+    if (keys[0]&&leftPaddle.getY()>=10)
     {
       //move left paddle up and draw it on the window
-      leftPaddle.moveUpAndDraw(window);
+//     	if (leftPaddle.getY()>=10)
+		leftPaddle.moveUpAndDraw(window);
+
     }
+
     if (keys[1])
     {
       //move left paddle down and draw it on the window
-
+	if (leftPaddle.getY()<=450)
+		leftPaddle.moveDownAndDraw(window);
 
     }
     if (keys[2])
     {
-
+	if (rightPaddle.getY()>=10)
+		rightPaddle.moveUpAndDraw(window);
     }
     if (keys[3])
     {
+	if (rightPaddle.getY()<=450)
 
+		rightPaddle.moveDownAndDraw(window);
     }
   }
 
