@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
 import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-
+import java.lang.Math;
 public class Pong extends Canvas implements KeyListener, Runnable
 {
   private Ball ball;
@@ -22,14 +22,35 @@ public class Pong extends Canvas implements KeyListener, Runnable
   private BufferedImage back;
 
 
-  public Pong()
+	private Wall leftWall;
+	private Wall rightWall;
+	private Wall topWall;
+	private Wall bottomWall;
+
+	private Score leftScore;
+	private Score rightScore;
+
+	private int width;
+	private int height;
+  public Pong(int w, int h)
   {
     //set up all variables related to the game
 
+	width = w;
+	height = h;
+	ball = new Ball();
+	leftPaddle = new Paddle (10, 10, height/15, height/5, 5); 
+	rightPaddle = new Paddle (width-50, 10, height/15, height/5, 5);
 
+	leftWall = new Wall(0, 0, 1, height);
+	rightWall = new Wall(width,0, 1, height);
+	topWall = new Wall (0,0,width,1);
+	bottomWall = new Wall (0, height, width, 1);
 
-
+	leftScore = new Score();
+	rightScore = new Score();	
     keys = new boolean[4];
+
 
     
     setBackground(Color.WHITE);
@@ -45,62 +66,78 @@ public class Pong extends Canvas implements KeyListener, Runnable
 
   public void paint(Graphics window)
   {
-    //set up the double buffering to make the game animation nice and smooth
     Graphics2D twoDGraph = (Graphics2D)window;
 
-    //take a snap shop of the current screen and same it as an image
-    //that is the exact same width and height as the current screen
-    if (back==null)
-      back = (BufferedImage)(createImage(getWidth(),getHeight()));
+	ball.moveAndDraw(window);
+	leftPaddle.draw(window);
+	rightPaddle.draw(window);
+	leftWall.draw(window);
+	rightWall.draw(window);
+	topWall.draw(window);
+	bottomWall.draw(window);
+	leftScore.drawLeft(window);
+	rightScore.drawRight(window);
 
-    //create a graphics reference to the back ground image
-    //we will draw all changes on the background image
-    Graphics graphToBack = back.createGraphics();
+  	if (ball.didCollideLeft(leftWall)||ball.didCollideRight(rightWall))
+	{
+      		ball.setXSpeed(-ball.getXSpeed());
+	
+		if (ball.didCollideLeft(leftWall))
+		{
+			rightScore.incrementRightScore();
+			rightScore.drawRight(window);
+		}
+		else
+		{
+			leftScore.incrementLeftScore();
+			leftScore.drawLeft(window);
+		}
+    	}
+
+                
+
+	if (ball.didCollideTop(topWall)||ball.didCollideBottom(bottomWall))
+	{
+		ball.setYSpeed(-ball.getYSpeed());	
+	}
 
 
-    ball.moveAndDraw(graphToBack);
-    leftPaddle.draw(graphToBack);
-    rightPaddle.draw(graphToBack);
 
 
-    //see if ball hits left wall or right wall
-    if (!(ball.getX()>=10 && ball.getX()<=780))
+	if (ball.didCollideLeft(leftPaddle)||ball.didCollideRight(leftPaddle)||ball.didCollideRight(rightPaddle)||ball.didCollideRight(leftPaddle))
+	{
+		ball.setXSpeed(-ball.getXSpeed());
+	}
+	if (ball.didCollideTop(leftPaddle)||ball.didCollideBottom(leftPaddle)||ball.didCollideTop(rightPaddle)||ball.didCollideBottom(rightPaddle))
+	{
+		ball.setYSpeed(-ball.getYSpeed());
+	}
+
+    if (keys[0])
     {
-      ball.setXSpeed(0);
-      ball.setYSpeed(0);
+      if (leftPaddle.getY()-leftPaddle.getSpeed()>=0)
+                leftPaddle.moveUpAndDraw(window);
+
     }
 
-                
-    //see if the ball hits the top or bottom wall 
+    if (keys[1])
+    {
+      //move left paddle down and draw it on the window
+        if (leftPaddle.getY()+leftPaddle.getHeight()<=height-1)
+                leftPaddle.moveDownAndDraw(window);
 
+    }
+    if (keys[2])
+    {
+        if (rightPaddle.getY()-leftPaddle.getSpeed()>=0)
+                rightPaddle.moveUpAndDraw(window);
+    }
+    if (keys[3])
+    {
+        if (rightPaddle.getY()+rightPaddle.getHeight()<=height-1)
 
-
-
-    //see if the ball hits the left paddle
-                
-                
-                
-    //see if the ball hits the right paddle
-                
-                
-                
-
-
-    //see if the paddles need to be moved
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                rightPaddle.moveDownAndDraw(window);
+    }
 
                 
     twoDGraph.drawImage(back, null, 0, 0);
