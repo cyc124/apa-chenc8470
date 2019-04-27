@@ -33,9 +33,10 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	private int height;
 
 //	private Ball ball;
-//	private BlinkyBall bBall;
+	private BlinkyBall bBall;
 //	private SpeedUpBall sBall; 
-	private InvisibleBall iBall; 
+//	private InvisibleBall iBall; 
+
 public Pong(int w, int h)
   {
     //set up all variables related to the game
@@ -54,9 +55,9 @@ public Pong(int w, int h)
 	rightScore = new Score();
 
 //	ball = new Ball(width/2,height/2);	
-//	bBall = new BlinkyBall(width/2,height/2);
+	bBall = new BlinkyBall(width/2,height/2);
 //  	sBall = new SpeedUpBall(width/2,height/2,20,20, Color.BLUE,1,1);
-	iBall = new InvisibleBall(width/2,height/2,10,10, Color.RED, 1,1);
+//	iBall = new InvisibleBall(width/2,height/2,10,10, Color.RED, 1,1);
 
 	keys = new boolean[4];
 
@@ -86,9 +87,9 @@ public Pong(int w, int h)
 	leftScore.drawLeft(window);
 	rightScore.drawRight(window);
 //	ball.moveAndDraw(window);
-//	bBall.moveAndDraw(window);
+	bBall.moveAndDraw(window);
 //	sBall.moveAndDraw(window);
-	iBall.moveAndDraw(window);
+//	iBall.moveAndDraw(window);
 
 
 //Ball
@@ -138,7 +139,7 @@ public Pong(int w, int h)
 	}
 */
 
-/*
+
 //BlinkyBall
 	if (bBall.didCollideLeft(leftWall)||bBall.didCollideRight(rightWall))
          {
@@ -183,7 +184,7 @@ public Pong(int w, int h)
         {
                 bBall.setYSpeed(-bBall.getYSpeed());
         }
-*/
+
 
 //SpeedUpBall
 
@@ -236,7 +237,7 @@ public Pong(int w, int h)
 */
 
 //Invisible Ball
-
+/*
 	 if (iBall.didCollideLeft(leftWall)||iBall.didCollideRight(rightWall))
         {
 
@@ -289,7 +290,7 @@ public Pong(int w, int h)
 	{
 		iBall.moveAndDraw(window);
 	}
-
+*/
 	
     if (keys[0])
     {

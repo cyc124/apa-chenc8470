@@ -48,6 +48,12 @@ public class Ball extends Block implements Collidable
 		super (x, y, wd, ht, col);
 		setXSpeed(xS);
 		setYSpeed(yS);
+	}
+	public Ball (int x, int y, int wd, int ht, int xS, int yS)
+	{
+		super(x, y, wd, ht);
+		setXSpeed(xS);
+		setYSpeed(yS);
 	}         
         public void setXSpeed(int xS)
 	{
