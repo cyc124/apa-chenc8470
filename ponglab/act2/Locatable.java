@@ -1,7 +1,3 @@
-//(c) A+ Computer Science
-//www.apluscompsci.com
-//Name -
-
 public interface Locatable
 {
   public void setPos( int x, int y);
