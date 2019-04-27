@@ -107,11 +107,13 @@ public class Ball extends Block implements Collidable
 	public boolean didCollideLeft(Object ob)
 	{
 		Block obj = (Block)ob;
-		if (getX()<obj.getX()+obj.getWidth()&&getX()+getWidth()>obj.getX()&&getY()>=obj.getY()&&getY()<=obj.getY()+obj.getHeight())
+		if (getX()<=obj.getX()+obj.getWidth()&&getX()+getWidth()>=obj.getX()+obj.getWidth()&&getY()+getHeight()>=obj.getY()&&getY()<=obj.getY()+obj.getHeight())
   		
 		
 	      	{
-                	return true;
+			if (getXSpeed()<0)
+	
+        	        	return true;
         	}
 		return false;
 	}	
@@ -120,29 +122,35 @@ public class Ball extends Block implements Collidable
 	public boolean didCollideRight(Object ob)
 	{
 		Block obj = (Block)ob;
-		if (getX()<obj.getX()+obj.getWidth()&&getX()+getWidth()>=obj.getX()&&getY()>=obj.getY()&&getY()<=obj.getY()+obj.getHeight())
+		if (getX()<=obj.getX()&&getX()+getWidth()>=obj.getX()&&getY()+getHeight()>=obj.getY()&&getY()<=obj.getY()+obj.getHeight())
 		{
-			return true;
-		}
-		return false;
-	}
-
-	public boolean didCollideTop(Object ob)
-	{
-		Block obj = (Block)ob;
-		if (getY()>=obj.getY()&&getY()<=obj.getY()+obj.getHeight()&&getX()+getWidth()>=obj.getX()&&getX()<obj.getX()+obj.getWidth())
-		{
-			return true;
+			if (getXSpeed()>0)
+	
+				return true;
 		}
 		return false;
 	}
 
 	public boolean didCollideBottom(Object ob)
 	{
-		Block obj = (Block) ob;
-		if (getY()<obj.getY()+obj.getHeight()&&getY()+getHeight()>=obj.getY()&&getX()+getWidth()>=obj.getX()&&getX()<obj.getX()+obj.getWidth())
+		Block obj = (Block)ob;
+		if (getY()+getHeight()>=obj.getY()&&getY()<=obj.getY()&&getX()+getWidth()>=obj.getX()&&getX()<obj.getX()+obj.getWidth())
 		{
-			return true;
+			if (getYSpeed()>0)
+
+				return true;
+		}
+		return false;
+	}
+
+	public boolean didCollideTop(Object ob)
+	{
+		Block obj = (Block) ob;
+		if (getY()<obj.getY()+obj.getHeight()&&getY()+getHeight()>=obj.getY()+obj.getHeight()&&getX()+getWidth()>=obj.getX()&&getX()<obj.getX()+obj.getWidth())
+		{
+			if (getYSpeed()<0)
+			
+				return true;
 		}
 		return false;
 	}

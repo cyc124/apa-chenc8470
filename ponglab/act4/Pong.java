@@ -80,18 +80,29 @@ public class Pong extends Canvas implements KeyListener, Runnable
 
   	if (ball.didCollideLeft(leftWall)||ball.didCollideRight(rightWall))
 	{
-      		ball.setXSpeed(-ball.getXSpeed());
-	
-		if (ball.didCollideLeft(leftWall))
+      	//	ball.setXSpeed(-ball.getXSpeed());
+		if (ball.didCollideRight(rightWall))
+		{
+			leftScore.incrementLeftScore();
+			
+			leftScore.drawLeft(window);
+			Ball b =new Ball(getX(), getY(), getWidth(), getHeight(), Color.WHITE);
+			b.draw(window);
+			ball.setX(200);
+			ball.setY(200);
+			
+			
+		}
+		else if (ball.didCollideLeft(leftWall))
 		{
 			rightScore.incrementRightScore();
 			rightScore.drawRight(window);
+			Ball b = new Ball(getX(), getY(), getWidth(),getHeight(),Color.WHITE);
+			b.draw(window);
+			ball.setX(200);
+			ball.setY(200);
 		}
-		else
-		{
-			leftScore.incrementLeftScore();
-			leftScore.drawLeft(window);
-		}
+//		ball.setXSpeed(-ball.getXSpeed());
     	}
 
                 
