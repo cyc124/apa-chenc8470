@@ -242,7 +242,28 @@ public class Pixel
     // update the picture with the int value
     picture.setBasicPixel(x,y,value);
   }
-  
+	public void setGrayAverage(Color col)
+	{
+		int gray = (col.getRed()+col.getGreen()+col.getBlue())/3;
+		updatePicture(this.getAlpha(),gray,gray,gray);
+	}
+		
+	public void setGrayLightness(Color col)
+	{
+		int mx = Math.max(col.getRed(),col.getGreen());
+		mx = Math.max(mx, col.getBlue());
+		int mn = Math.min(col.getRed(), col.getGreen());
+		mn = Math.min(mn, col.getBlue());
+		int gray = (mx+mn)/2;
+	//	int gray = Math.abs(col.getRed(),col.getGreen(),col.getBlue())+Math.min(col.getRed(),col.getGreen(),col.getBlue())/2;
+	updatePicture(this.getAlpha(),gray,gray,gray);
+	}
+	
+	public void setGrayLuminosity(Color col)
+	{
+		int gray =(int)( 0.21*col.getRed()+0.72*col.getGreen()+0.07*col.getBlue());
+		updatePicture(this.getAlpha(),gray,gray,gray);
+	}  
   /**
    * Method to correct a color value to be within 0 to 255
    * @param the value to use
