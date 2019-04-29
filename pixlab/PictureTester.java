@@ -164,6 +164,16 @@ public class PictureTester
 	}
 
 
+	public static void testBlur(int x, int y, int w, int h, int n)
+	{
+		Picture redMoto = new Picture("redMotorcycle.jpg");
+		for (int i = 0; i<n;i++)
+		{
+			redMoto.blur(x, y, w, h);
+		}
+		redMoto.explore();
+	}
+
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
@@ -171,6 +181,12 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
+	testBlur(180,160,25,25,1);
+	testBlur(180,160,25,25,5);
+	testBlur(180,160,25,25,10);
+
+
+	testBlur(0,0,639,479,10);
 //    testZeroBlue();
   //  testKeepOnlyBlue();
     //testKeepOnlyRed();
@@ -192,7 +208,7 @@ public class PictureTester
   //  testCopy();
 //	testMyCollage();
    // testEdgeDetection();
-    testEdgeDetection2();
+   // testEdgeDetection2();
     //testChromakey();
     //testEncodeAndDecode();
     //testGetCountRedOverValue(250);

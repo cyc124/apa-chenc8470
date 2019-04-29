@@ -410,7 +410,7 @@ public class Picture extends SimplePicture
 	}
 
   /** copy from the passed fromPic to the
-    * specified startRow and startCol in the
+    * specified startRow and startCol in the:
     * current picture
     * @param fromPic the picture to copy from
     * @param startRow the start row to copy to
@@ -542,6 +542,110 @@ public class Picture extends SimplePicture
 	      }
 	    }
 }
+
+	public void blur (int x, int y, int w, int h)
+	{
+		Pixel p1 = null; 
+		Pixel p2 = null; 
+		Pixel p3 = null;
+		Pixel p4 = null; 
+		Pixel p5 = null; 
+		Pixel p6 = null; 
+		Pixel p7 = null; 
+		Pixel p8 = null;
+		Pixel current = null;
+		Pixel[][] pixels = this.getPixels2D();
+		for (int row = x+1; row< x+h-1;row++)
+		{
+			for (int col = y+1; col< y+w-1;col++)
+			{
+				current = pixels[row][col];
+				p1 = pixels[row-1][col-1];
+				p2 = pixels[row-1][col];
+				p3 = pixels[row-1][col+1];
+				p4 = pixels[row][col-1];
+				p5 = pixels[row][col+1];
+				p6 = pixels[row+1][col-1];
+				p7 = pixels[row+1][col];
+				p8 = pixels[row+1][col+1];
+				current.setRed((p1.getRed()+p2.getRed()+p3.getRed()+p4.getRed()+p5.getRed()+p6.getRed()+p7.getRed()+p8.getRed())/8);
+				current.setGreen((p1.getGreen()+p2.getGreen()+p3.getGreen()+p4.getGreen()+p5.getGreen()+p6.getGreen()+p7.getGreen()+p8.getGreen())/8);
+				current.setBlue((p1.getBlue()+p2.getBlue()+p3.getBlue()+p4.getBlue()+p5.getBlue()+p6.getBlue()+p7.getBlue()+p8.getBlue())/8);
+			}
+		}
+
+		for (int row = x+1; row < x+h-1;row++)
+		{
+			current = pixels[row][y];
+			p2 = pixels[row-1][y];
+                        p3 = pixels[row-1][y+1];
+			p5 = pixels[row][y+1];
+			p7 = pixels[row+1][y];
+                        p8 = pixels[row+1][y+1];
+			current.setRed((p2.getRed()+p3.getRed()+p5.getRed()+p7.getRed()+p8.getRed())/5);
+			current.setGreen((p2.getGreen()+p3.getGreen()+p5.getGreen()+p7.getGreen()+p8.getGreen())/5);
+			current.setBlue((p2.getBlue()+p3.getBlue()+p5.getBlue()+p7.getBlue()+p8.getBlue())/5);
+
+		}
+
+		for (int row = x+1; row < x+h-1;row++)
+                {
+                        current = pixels[row][y+w];
+                        p1 = pixels[row-1][y+w-1];
+                        p2 = pixels[row-1][y+w];
+			p4 = pixels[row][y+w-1];
+			p6 = pixels[row+1][y+w-1];
+                        p7 = pixels[row+1][y+w];
+			current.setRed((p1.getRed()+p2.getRed()+p4.getRed()+p6.getRed()+p7.getRed())/5);
+                        current.setGreen((p1.getGreen()+p2.getGreen()+p4.getGreen()+p6.getGreen()+p7.getGreen())/5);
+                        current.setBlue((p1.getBlue()+p2.getBlue()+p4.getBlue()+p6.getBlue()+p7.getBlue())/5);
+
+                }
+
+		for (int col = y+1; col<y+w-1;col++)
+		{
+			current = pixels[x][col];
+			p4 = pixels[x][col-1];
+                        p5 = pixels[x][col+1];
+                        p6 = pixels[x+1][col-1];
+                        p7 = pixels[x+1][col];
+                        p8 = pixels[x+1][col+1];
+			current.setRed((p4.getRed()+p5.getRed()+p6.getRed()+p7.getRed()+p8.getRed())/5);
+			current.setGreen((p4.getGreen()+p5.getGreen()+p6.getGreen()+p7.getGreen()+p8.getGreen())/5);
+			current.setBlue((p4.getBlue()+p5.getBlue()+p6.getBlue()+p7.getBlue()+p8.getBlue())/5);
+		}
+
+		for (int col = y+1; col<y+w-1;col++)
+		{
+			current = pixels[x+h][col];
+			 p1 = pixels[x+h-1][col-1];
+                         p2 = pixels[x+h-1][col];
+                         p3 = pixels[x+h-1][col+1];
+                         p4 = pixels[x+h][col-1];
+                         p5 = pixels[x+h][col+1];
+
+			current.setRed((p1.getRed()+p2.getRed()+p3.getRed()+p4.getRed()+p5.getRed())/5);
+			current.setGreen((p1.getGreen()+p2.getGreen()+p3.getGreen()+p4.getGreen()+p5.getGreen())/5);
+			current.setBlue((p1.getBlue()+p2.getBlue()+p3.getBlue()+p4.getBlue()+p5.getBlue())/5);
+		}
+	
+		pixels[x][y].setRed((pixels[x+1][y].getRed()+pixels[x][y+1].getRed()+pixels[x+1][y+1].getRed())/3);
+		pixels[x][y+w].setRed((pixels[x][y+w-1].getRed()+pixels[x+1][y+w-1].getRed()+pixels[x+1][y+w].getRed())/3);
+		pixels[x+h][y].setRed((pixels[x+h-1][y].getRed()+pixels[x+h-1][y+1].getRed()+pixels[x+h][y+1].getRed())/3);
+		pixels[x+h][y+w].setRed((pixels[x+h-1][y+w].getRed()+pixels[x+h-1][y+w-1].getRed()+pixels[x+h][y+w-1].getRed())/3);
+
+
+		pixels[x][y].setBlue((pixels[x+1][y].getBlue()+pixels[x][y+1].getBlue()+pixels[x+1][y+1].getBlue())/3);
+                pixels[x][y+w].setBlue((pixels[x][y+w-1].getBlue()+pixels[x+1][y+w-1].getBlue()+pixels[x+1][y+w].getBlue())/3);
+                pixels[x+h][y].setBlue((pixels[x+h-1][y].getBlue()+pixels[x+h-1][y+1].getBlue()+pixels[x+h][y+1].getBlue())/3);
+                pixels[x+h][y+w].setBlue((pixels[x+h-1][y+w].getBlue()+pixels[x+h-1][y+w-1].getBlue()+pixels[x+h][y+w-1].getBlue())/3);
+
+		pixels[x][y].setGreen((pixels[x+1][y].getGreen()+pixels[x][y+1].getGreen()+pixels[x+1][y+1].getGreen())/3);
+                pixels[x][y+w].setGreen((pixels[x][y+w-1].getGreen()+pixels[x+1][y+w-1].getGreen()+pixels[x+1][y+w].getGreen())/3);
+                pixels[x+h][y].setGreen((pixels[x+h-1][y].getGreen()+pixels[x+h-1][y+1].getGreen()+pixels[x+h][y+1].getGreen())/3);
+                pixels[x+h][y+w].setGreen((pixels[x+h-1][y+w].getGreen()+pixels[x+h-1][y+w-1].getGreen()+pixels[x+h][y+w-1].getGreen())/3);
+	}
+
 
 	public void edgeDetection2()
   
