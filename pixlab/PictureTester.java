@@ -181,8 +181,8 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-	testBlur(180,160,25,25,1);
-	testBlur(180,160,25,25,5);
+//	testBlur(180,160,25,25,1);
+//	testBlur(180,160,25,25,5);
 	testBlur(180,160,25,25,10);
 
 
