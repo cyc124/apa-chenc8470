@@ -54,8 +54,38 @@ public class PictureTester
     caterpillar.mirrorVertical();
     caterpillar.explore();
   }
-  
-  /** Method to test mirrorTemple */
+	public static void testMirrorVerticalRightToLeft()
+	{
+		Picture caterpillar = new Picture ("caterpillar.jpg");
+		caterpillar.explore();
+		caterpillar.mirrorVerticalRightToLeft();
+		caterpillar.explore();
+	}
+
+
+	public static void testMirrorHorizontal()
+	{
+		Picture caterpillar = new Picture ("caterpillar.jpg");
+		caterpillar.explore();
+		caterpillar.mirrorHorizontal();
+		caterpillar.explore();
+	}
+	
+	public static void testMirrorHorizontalBotToTop()
+	{
+		Picture caterpillar = new Picture ("caterpillar.jpg");
+		caterpillar.explore();
+		caterpillar.mirrorHorizontalBotToTop();
+		caterpillar.explore();
+	}
+
+	public static void testMirrorDiagonal()
+	{
+		Picture caterpillar = new Picture ("beach.jpg");
+		caterpillar.mirrorDiagonal();
+		caterpillar.explore();
+	}  
+/** Method to test mirrorTemple */
   public static void testMirrorTemple()
   {
     Picture temple = new Picture("temple.jpg");
@@ -86,6 +116,44 @@ public class PictureTester
 		water.explore();
 			
 	}
+
+
+	public static void testMirrorArms()
+	{
+		Picture snowman = new Picture ("snowman.jpg");
+		snowman.mirrorArms();
+		snowman.explore();
+	}
+
+	public static void testMirrorGull()
+	{
+		Picture gull = new Picture ("seagull.jpg");
+		gull.mirrorGull();
+		
+		gull.explore();
+	}
+
+	public static void testMirrorRectangle()
+	{
+		Picture gull = new Picture ("seagull.jpg");
+		gull.mirrorRectangle(236,236,343,322, true);
+		gull.explore();
+	}
+
+	public static void testCopy()
+	{
+		Picture gull = new Picture ("seagull.jpg");
+		gull.copy2(gull, 10, 10, 100,100, 200, 200, 290,290);
+		gull.explore();
+	}
+
+
+	public static void testMyCollage()
+	{
+		Picture beach = new Picture("beach.jpg");
+		beach.myCollage();
+		beach.explore();
+	}
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
@@ -98,15 +166,21 @@ public class PictureTester
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
    // testNegate();
-    testGrayscale();
+//    testGrayscale();
 //    testFixUnderwater();
     //testMirrorVertical();
-    //testMirrorTemple();
-    //testMirrorArms();
-    //testMirrorGull();
-    //testMirrorDiagonal();
+//	testMirrorVerticalRightToLeft();
+// 	testMirrorHorizontal();
+//	testMirrorHorizontalBotToTop();
+	
+//	  testMirrorTemple();
+  //  testMirrorArms();
+  //  testMirrorGull();
+//	testMirrorRectangle();
+//    testMirrorDiagonal();
     //testCollage();
-    //testCopy();
+  //  testCopy();
+	testMyCollage();
     //testEdgeDetection();
     //testEdgeDetection2();
     //testChromakey();
