@@ -186,7 +186,7 @@ public class PictureTester
 	testBlur(180,160,25,25,10);
 
 
-	testBlur(0,0,639,479,10);
+//	testBlur(0,0,639,479,10);
 //    testZeroBlue();
   //  testKeepOnlyBlue();
     //testKeepOnlyRed();
