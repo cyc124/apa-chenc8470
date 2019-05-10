@@ -16,14 +16,14 @@ public class Ship extends MovingThing
 
   public Ship()
   {
-    this(10,10,100,100,10);
+    this(10,10,100,100,2);
   }
 
   public Ship(int x, int y)
   {
     //add code here
 	super(x,y);
-	speed = 0;
+	speed = 2;
   }
 
   public Ship(int x, int y, int s)
